@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/css_ThemThanhVien.css">
+    <script>
+        function KiemTraTenDN() {
+            var re = /^[a-z]\w*/;
+            if (re.test(document.getElementById('txtDN').value.trim()) == false) {
+                tendn.innerText = " * bat buoc, bat dau bang ki tu";
+                return false;
+            } else {
+                tendn.innerText = " *";
+                return true;
+            }
+        }
+        function KiemTraEmail() {
+            var re = /^([a-zA-Z0-9])+\@([a-zA-Z0-9])+\.[a-z]{2,3}$/;
+            if (re.test(document.getElementById('txtEmail').value.trim()) == false) {
+                email1.innerText = " * nhap dung dia chi email";
+                return false;
+            } else {
+                email1.innerText = " *";
+                return true;
+            }
+        }
+        function KiemTraPassWord() {
+            // re = /(?=.*\d).{6,}/
+            var re = /[?=.*\d]{6,}/;
+            if (re.test(document.getElementById('txtMK').value.trim()) == false) {
+                mk.innerText = " * phai co chu so, it nhat 6 ki tu";
+                return false;
+            } else {
+                mk.innerText = " *";
+                return true;
+            }
+        }
+        function KiemTraSdt() {
+            var re = /^(028|09)((\-|\.|\ ){1}\d+){3,}$/;
+            if (re.test(document.getElementById('txtDT').value.trim()) == false) {
+                sdt.innerText = " * so dien thoai phai la so";
+                return false;
+            } else {
+                sdt.innerText = " *";
+                return true;
+            }
+        }
+        function KiemTraXacNhanPassword() {
+
+            if (document.getElementById("txtMK").value != document.getElementById("txtXNMK").value) {
+                txtXNMK1.innerText = " * phai giong o mat khau";
+                return false;
+            } else {
+                txtXNMK1.innerText = " *";
+                return true;
+            }
+        }
+        
+        function SubmitForm() {
+            if (KiemTraTenDN() == false || KiemTraPassWord() == false || KiemTRaXacNhanPassword() == false) {
+                alert("Bạn chưa nhập đủ thông tin");
+                return false;
+            }
+            return true;
+        }
+
+
+    </script>
+</head>
+<body>
+    <div id="nav">
+        <ul class="menu" >
+            <li style="color: white;"><a href="../html/trangchu.html">Trang chủ</a></li>
+            <li><a href="">Dự án</a></li>
+            <li><a href="">Nhân viên</a>
+                <ul class="sub_menu">
+                    <li><a href="#">Tạo tài khoản</a></li>
+                    <li><a href="../html/CapNhatTV.html">Cập nhật tài khoản</a></li>
+                   
+                </ul>
+            </li>
+            <li><a href="../index.html">Quản lý</a> 
+                <ul class="sub_menu">
+                    <li><a href="../index.html">Quản lý dự án</a></li>
+                    <li><a href="../index.html">Quản lý nhân viên</a></li>
+                   
+                </ul>
+            </li>
+             <li><a href="../html/Form_DangNhap.html">Liên hệ</a> </li>                   
+        </ul>
+        
+            <span >
+                <div id="signin">
+                    <a href="../hosonhanvien.html">
+                        <input style="border: 2px solid orange;font-size: 10px;
+                        background: black; color: white; border-radius: 15px;" type="button" value="Hồ sơ của tôi"  >
+                    </a>
+                   
+                </div>
+            
+        </span>
+
+        </a>
+        
+
+    </div>
+    <br><br><br><br><br><br><br>
+    <center>
+        <h1 style="color: white;">Thêm thành viên</h1>
+    </center>
+    <div id="h" style="color: white; margin-left: 200px;">
+    <h3>Thêm người dùng mới</h3>
+    <h6>Tạo một người sử dụng và thêm vào trang mạng này</h6>
+    </div>
+    <form name="form1" onsubmit="return SubmitForm();" method="POST" action="">
+    
+        <center>
+   
+            <table style="width: 1000px; font-size: 18px; color:white; margin: 30px;">
+               
+               
+                <tr>
+                    <td ><label for="emten" >Tên người dùng:</label></td>
+                    <td >
+                    <input id="txtDN" onblur="return KiemTraTenDN();" type="text"  size="30" placeholder="txtDN" />
+                    
+                        <span id="tendn">*</span></td>
+                    
+                </tr>
+                <tr>
+                    <td><label for="emma">Mã nhân viên:</label></td>
+                    <td><input type="text" id="txtManv" name="txtManv" size="30" placeholder="txtManv" />
+                        <span id="hoten">* bat buoc</span></td>
+                </tr>
+                <tr>
+                    <td><label for="ememail">Email:</label></td>
+                    <td><input type="email" id="txtEmail" name="txtEmail" size="30" placeholder="txtEmail" onblur="return KiemTraEmail()"; />
+                        <span id="email1">* </span></td>
+                </tr>
+                <tr>
+                    <td><label for="emphong">Phòng ban:</label></td>
+                    <td><input type="text" id="txtPb" name="txtPb" size="30" placeholder="txtName" />
+                        <span id="hoten">* bat buoc</span></td>
+                </tr>
+                <tr>
+                    <td><label for="emsdt">Số điện thoại:</label></td>
+                    <td> <input type="text" id="txtDT" name="txtDT" size="30" placeholder="txtDT" onblur="return KiemTraSdt()"; />
+                        <span id="sdt">* </span></td>
+                </tr>
+                <tr>
+                    <td><label for="emmk">Mật khẩu:</label></td>
+                    <td><input id="txtMK" onblur="return KiemTraPassWord();" type="password" name="txtMK" size="30"
+                        placeholder="txtMK" />
+                    <span id="mk">*</span></td>
+                </tr>
+                <tr>
+                    <td><label for="emxnmk">Xác nhận mật khẩu:</label></td>
+                    <td><input id="txtXNMK" onblur="return KiemTraXacNhanPassword();" type="password" name="txtXNMK" size="30"
+                        placeholder="txtXNMK" />
+                    <span id="txtXNMK1">*</span></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+               
+                <tr>
+                    <td>
+                        <br>
+                        <div id="submit">
+                            <input type="submit" value="Thêm người dùng mới" id="submit" />
+                            
+                        </div>
+                    
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <tr></tr>
+                </tr>
+            </table>
+        </center>
+    
+    </form>
+   
+</body>
+</html>

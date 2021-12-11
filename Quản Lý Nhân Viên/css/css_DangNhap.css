@@ -1,0 +1,81 @@
+body{
+    background-image: url(../img/websign.png);
+    background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	color:black;
+	font-family: 'Quicksand', sans-serif;
+	text-align: left;
+}
+body a {
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	text-decoration: none;
+}
+
+input[type="button"], input[type="submit"] {
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+}
+
+
+.w3layoutscontaineragileits {
+    width: 38%;
+    margin-right: 200px;
+    float: right;
+    background: floralwhite;
+    padding: 30px;
+    height: 540px;
+}
+
+h2 {
+    font-size: 35px;
+    font-weight: 300;
+    margin-bottom: 30px;
+    color:black;
+    text-transform: uppercase;
+}
+
+
+input[type="text"], input[type="password"], input[type="email"]{
+	width: 84%;
+	padding: 15px 10px 15px;
+	font-size: 14px;
+	background: transparent;
+	border: 2px solid #537b35;
+	outline: none;
+	margin-bottom: 26px;
+	
+	font-family: 'Quicksand', sans-serif;
+}
+input[type="text"]{
+	
+	background-size: 25px;
+}
+input[type="email"] {
+	
+	background-size: 25px;
+}
+
+input[type="password"] {
+	
+	background-size: 25px;
+}
+input[type="submit"] {
+   
+    
+    font-size: 20px;
+    background-color: blanchedalmond;
+	background-color:orange;
+	border-radius:15px;
+}

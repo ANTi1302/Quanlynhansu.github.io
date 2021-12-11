@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Hồ sơ của tôi</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <!--===============================================================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!--===============================================================================================-->
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+    <!--===============================================================================================-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script type="text/javascript">
+        //Phân Trang Cho Table
+        //<![CDATA[
+        function Pager(tableName, itemsPerPage) {
+            this.tableName = tableName;
+            this.itemsPerPage = itemsPerPage;
+            this.currentPage = 1;
+            this.pages = 0;
+            this.inited = false;
+
+            this.showRecords = function (from, to) {
+                var rows = document.getElementById(tableName).rows;
+                for (var i = 1; i < rows.length; i++) {
+                    if (i < from || i > to)
+                        rows[i].style.display = 'none';
+                    else
+                        rows[i].style.display = '';
+                }
+            }
+
+            this.showPage = function (pageNumber) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var oldPageAnchor = document.getElementById('pg' + this.currentPage);
+                oldPageAnchor.className = 'pg-normal';
+
+                this.currentPage = pageNumber;
+                var newPageAnchor = document.getElementById('pg' + this.currentPage);
+                newPageAnchor.className = 'pg-selected';
+
+                var from = (pageNumber - 1) * itemsPerPage + 1;
+                var to = from + itemsPerPage - 1;
+                this.showRecords(from, to);
+            }
+
+            this.prev = function () {
+                if (this.currentPage > 1)
+                    this.showPage(this.currentPage - 1);
+            }
+
+            this.next = function () {
+                if (this.currentPage < this.pages) {
+                    this.showPage(this.currentPage + 1);
+                }
+            }
+
+            this.init = function () {
+                var rows = document.getElementById(tableName).rows;
+                var records = (rows.length - 1);
+                this.pages = Math.ceil(records / itemsPerPage);
+                this.inited = true;
+            }
+            this.showPageNav = function (pagerName, positionId) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var element = document.getElementById(positionId);
+
+                var pagerHtml = '<span onclick="' + pagerName +
+                    '.prev();" class="pg-normal">&#171</span> | ';
+                for (var page = 1; page <= this.pages; page++)
+                    pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName +
+                        '.showPage(' + page + ');">' + page + '</span> | ';
+                pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal">&#187;</span>';
+
+                element.innerHTML = pagerHtml;
+            }
+
+        }
+        //]]>
+
+
+    </script>
+</head>
+
+<body onload="time()">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i> HỒ SƠ CỦA BẠN</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#home" data-toggle="tooltip" data-placement="bottom"
+                            >HỒ SƠ CỦA BẠN</a></li>
+                    <li><a href="html/trangchu.html" data-placement="bottom" title="TRANG CHỦ">TRANG CHỦ</a></li>
+                    <li><a href="html/trangchu.html" data-placement="bottom" title="DỰ ÁN">DỰ ÁN</a></li>
+
+                    <li>
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="NHÂN VIÊN"><b>NHÂN VIÊN</b>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown">
+                            <li><a href="html/Them_Thanh_vien.html" data-placement="bottom" title="TẠO TÀI KHOẢN"><b>TẠO TÀI KHOẢN
+                                    </b></a></li>
+                            <li><a href="html/CapNhatTV.html" data-placement="bottom" title="CẬP NHẬT TÀI KHOẢN"><b>CẬP NHẬT TÀI KHOẢN
+                                    </b></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="QUẢN LÝ"><b>QUẢN LÝ</b>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown">
+                            <li><a href="/index.html" data-placement="bottom" title="QUẢN LÝ DỰ ÁN"><b>QUẢN LÝ DỰ ÁN
+                                    </b></a></li>
+                            <li><a href="/index.html" data-placement="bottom" title="QUẢN LÝ NHÂN VIÊN"><b>QUẢN LÝ NHÂN VIÊN
+                                    </b></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="html/Form_DangNhap.html" data-toggle="tooltip" data-placement="bottom" title="LIÊN HỆ">LIÊN HỆ</a></li>
+                    <li>
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="TÀI KHOẢN"><b>Tài Khoản</b>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown">
+                            <li><a href="/index.html" data-toggle="tooltip" data-placement="bottom"
+                                    title="ĐĂNG XUẤT"><b>Đăng xuất <i class="fas fa-sign-out-alt"></i></b></a></li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid al">
+        <div>
+            <table style="float: left;">
+                <thead>
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th >
+                            <p >
+                                <center>THÔNG TIN CÁ NHÂN</center>
+                            </p>
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="img/nhanvien1.jpg" alt="" width="190px" ; height="250px" style="float: left;">
+                        </td>
+                        <td style="padding: 15px;">
+                            
+                            <p>
+                                <label for="">Mã nhân viên: 19516531</label>
+                            </p>
+                            <p>
+                                <label for="">Họ và tên: Trần Thị Anh Thư</label>
+                            </p>
+                            <p>
+                                <label for="">Giới tính: Nữ</label>
+                            </p>
+                            <p>
+                                <label for="">Mã số thuế: TD-1652</label>
+                            </p>
+                            <p>
+                                <label for="">Ngày cấp MST: 31/2/2020</label>
+                            </p>
+                            <p>
+                                <label for="">Chức vụ: Quản Lý</label>
+                            </p>
+
+
+
+
+                        </td>
+
+                        <td style="padding-left: 25px;">
+                            <p>
+                                <label for="">Số CMND: 95715892</label>
+                            </p>
+                            <p>
+                                <label for="">Số điện thoại: 0932904529</label>
+                            </p>
+                            <p>
+                                <label for="">Ngày sinh: 13/2/2001</label>
+                            </p>
+                            <p>
+                                <label for="">Địa chỉ: 24 đường 1, khu phố 1, phường Tam Bình, TP. Thủ Đức</label>
+                            </p>
+                            <p>
+                                <label for="">Email: porkoe3443334@gmail.com</label>
+                            </p>
+                            <p>
+                                <label for="">Trình độ: Đại học</label>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div>
+            <canvas id="myChart" style="width:100%;max-width:600px;float:right;"></canvas>
+        </div>
+        <script>
+            var xValues = ["Tham dự đầu tư", "Thiết kế 3D", "Sắp xếp tài liệu đầu tư", "Khảo sát công trình", "Khảo sát công trình lần 1"];
+            var yValues = [50, 70, 90, 32, 80];
+            var barColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#1e7145"
+            ];
+
+            new Chart("myChart", {
+                type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Mức độ hoàn thành dự án (%)"
+                    }
+                }
+            });
+        </script>
+
+        <div class="table-title">
+            <div class="row">
+
+            </div>
+
+        </div>
+        <div id="clock"></div>
+        <table class="table table-bordered" id="myTable">
+            <thead>
+                <tr class="ex">
+                    <th width="50px">STT</th>
+                    <th width="70px">Tên Công Việc</th>
+                    <th width="70px">TRỌNG SỐ</th>
+                    <th width="70px">Tiến độ</th>
+                    <th width="70px">HOÀN THÀNH(%)</th>
+                    <th width="100px">NGƯỜI PHỤ TRÁCH</th>
+                    <th width="70px">NGÀY BẮT ĐẦU</th>
+                    <th width="70px">NGÀY KẾT THÚC</th>
+                    <th width="70px">GHI CHÚ</th>
+                    <th width="auto; !important">Tính Năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01</td>
+                    <td>Tham dự đầu tư </td>
+                    <td>15</td>
+                    <td>Đang hoàn thành</td>
+                    <td>50%</td>
+                    <td>Trương Thị Hồng Hạnh</td>
+                    <td>21/10/2021</td>
+                    <td>21/12/2021</td>
+                    <td></td>
+                    <td>
+                        <a class="add" title="Lưu Lại" data-toggle="tooltip"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i></a>
+                        <a class="edit" title="Sửa" data-toggle="tooltip"><i class="fa fa-pencil"
+                                aria-hidden="true"></i></a>
+                        <a class="delete" title="Xóa" data-toggle="tooltip"><i class="fa fa-trash-o"
+                                aria-hidden="true"></i></a>
+                        <a title="check" data-toggle="tooltip" href=""><input type="checkbox"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>02</td>
+                    <td>Thiết kế 3D </td>
+                    <td>35</td>
+                    <td>Đang hoàn thành</td>
+                    <td>70%</td>
+                    <td>Nguyễn Văn Thành</td>
+                    <td>27/5/2021</td>
+                    <td>27/6/2021</td>
+                    <td></td>
+                    <td>
+                        <a class="add" title="Lưu Lại" data-toggle="tooltip"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i></a>
+                        <a class="edit" title="Sửa" data-toggle="tooltip"><i class="fa fa-pencil"
+                                aria-hidden="true"></i></a>
+                        <a class="delete" title="Xóa" data-toggle="tooltip"><i class="fa fa-trash-o"
+                                aria-hidden="true"></i></a>
+                        <a title="check" data-toggle="tooltip" href=""><input type="checkbox"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>03</td>
+                    <td>Sắp xếp tài liệu đầu tư</td>
+                    <td>75</td>
+                    <td>Đang hoàn thành</td>
+                    <td>90%</td>
+                    <td>Phan Hữu Nghĩa</td>
+                    <td>2/12/2021</td>
+                    <td>21/2/2021</td>
+                    <td></td>
+                    <td>
+                        <a class="add" title="Lưu Lại" data-toggle="tooltip"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i></a>
+                        <a class="edit" title="Sữa" data-toggle="tooltip"><i class="fa fa-pencil"
+                                aria-hidden="true"></i></a>
+                        <a class="delete" title="Xóa" data-toggle="tooltip"><i class="fa fa-trash-o"
+                                aria-hidden="true"></i></a>
+                        <a title="check" data-toggle="tooltip" href=""><input type="checkbox"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>04</td>
+                    <td>Kinh doanh thu tiền </td>
+                    <td>32</td>
+                    <td>Bắt đầu công việc</td>
+                    <td>0%</td>
+                    <td>Phạm Thị Cúc</td>
+                    <td>13/1/2021</td>
+                    <td>13/2/2021</td>
+                    <td></td>
+                    <td>
+                        <a class="add" title="Lưu Lại" data-toggle="tooltip"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i></a>
+                        <a class="edit" title="Sửa" data-toggle="tooltip"><i class="fa fa-pencil"
+                                aria-hidden="true"></i></a>
+                        <a class="delete" title="Xóa" data-toggle="tooltip"><i class="fa fa-trash-o"
+                                aria-hidden="true"></i></a>
+                        <a title="check" data-toggle="tooltip" href=""><input type="checkbox"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>05</td>
+                    <td>Khảo sát công trình </td>
+                    <td>7</td>
+                    <td>Đang hoàn thành</td>
+                    <td>32%</td>
+                    <td>Trần Hữu Trọng</td>
+                    <td>6/7/2021</td>
+                    <td>6/8/2021</td>
+                    <td></td>
+                    <td>
+                        <a class="add" title="Lưu Lại" data-toggle="tooltip"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i></a>
+                        <a class="edit" title="Sửa" data-toggle="tooltip"><i class="fa fa-pencil"
+                                aria-hidden="true"></i></a>
+                        <a class="delete" title="Xóa" data-toggle="tooltip"><i class="fa fa-trash-o"
+                                aria-hidden="true"></i></a>
+                        <a title="check" data-toggle="tooltip" href=""><input type="checkbox"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>06</td>
+                    <td>Khảo sát công trình lần 1</td>
+                    <td>46</td>
+                    <td>Đang hoàn thành</td>
+                    <td>80%</td>
+                    <td>Nguyễn Thị Kim Ngân</td>
+                    <td>21/9/2021</td>
+                    <td>21/10/2021</td>
+                    <td></td>
+                    <td>
+                        <a class="add" title="Lưu Lại" data-toggle="tooltip"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i></a>
+                        <a class="edit" title="Sửa" data-toggle="tooltip"><i class="fa fa-pencil"
+                                aria-hidden="true"></i></a>
+                        <a class="delete" title="Xóa" data-toggle="tooltip"><i class="fa fa-trash-o"
+                                aria-hidden="true"></i></a>
+                        <a title="check" data-toggle="tooltip" href=""><input type="checkbox"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>07</td>
+                    <td>Tham dự đầu tư lần 2</td>
+                    <td>15</td>
+                    <td>Bắt đầu công việc</td>
+                    <td>0%</td>
+                    <td>Nguyễn Anh Tuấn</td>
+                    <td>21/1/2021</td>
+                    <td>21/2/2021</td>
+                    <td></td>
+                    <td>
+                        <a class="add" title="Lưu Lại" data-toggle="tooltip"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i></a>
+                        <a class="edit" title="Sửa" data-toggle="tooltip"><i class="fa fa-pencil"
+                                aria-hidden="true"></i></a>
+                        <a class="delete" title="Xóa" data-toggle="tooltip"><i class="fa fa-trash-o"
+                                aria-hidden="true"></i></a>
+                        <a title="check" data-toggle="tooltip" href=""><input type="checkbox"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>08</td>
+                    <td>Tham dự đầu tư lần 2 </td>
+                    <td>28</td>
+                    <td>Bắt đầu công việc</td>
+                    <td>0%</td>
+                    <td>Huỳnh Cẩm Thu</td>
+                    <td>21/12/2022</td>
+                    <td>21/2/2022</td>
+                    <td></td>
+                    <td>
+                        <a class="add" title="Lưu Lại" data-toggle="tooltip"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i></a>
+                        <a class="edit" title="Sửa" data-toggle="tooltip"><i class="fa fa-pencil"
+                                aria-hidden="true"></i></a>
+                        <a class="delete" title="Xóa" data-toggle="tooltip"><i class="fa fa-trash-o"
+                                aria-hidden="true"></i></a>
+                        <a title="check" data-toggle="tooltip" href=""><input type="checkbox"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>09</td>
+                    <td>Tham dự đầu tư lần 3 </td>
+                    <td>15</td>
+                    <td>Bắt đầu công việc</td>
+                    <td>0%</td>
+                    <td>Nguyễn Xuân Ly</td>
+                    <td>21/10/2022</td>
+                    <td>21/12/2022</td>
+                    <td></td>
+                    <td>
+                        <a class="add" title="Lưu Lại" data-toggle="tooltip"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i></a>
+                        <a class="edit" title="Sửa" data-toggle="tooltip"><i class="fa fa-pencil"
+                                aria-hidden="true"></i></a>
+                        <a class="delete" title="Xóa" data-toggle="tooltip"><i class="fa fa-trash-o"
+                                aria-hidden="true"></i></a>
+                        <a title="check" data-toggle="tooltip" href=""><input type="checkbox"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Thiết kế dự án 1 </td>
+                    <td>89</td>
+                    <td>Bắt đầu công việc</td>
+                    <td>0%</td>
+                    <td>Hoàng Xuân Nam</td>
+                    <td>21/10/2022</td>
+                    <td>21/12/2022</td>
+                    <td></td>
+                    <td>
+                        <a class="add" title="Lưu Lại" data-toggle="tooltip"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i></a>
+                        <a class="edit" title="Sửa" data-toggle="tooltip"><i class="fa fa-pencil"
+                                aria-hidden="true"></i></a>
+                        <a class="delete" title="Xóa" data-toggle="tooltip"><i class="fa fa-trash-o"
+                                aria-hidden="true"></i></a>
+                        <a title="check" data-toggle="tooltip" href=""><input type="checkbox"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="pageNavPosition" class="text-right"></div>
+        <p ><center> <h1 style="color: orange;">
+            Deadline
+        </h1> </center></p>
+        <div class="timeline">
+            
+            <ul>
+                <!--Nội dung cho timeline thứ 1-->
+                <li>
+                    <div class="noi_dung">
+                        <h3>Khảo sát công trình</h3>
+                        <p>Các mẫu thiết kế second home thuộc phân kỳ The Tropicana - NovaWorld Ho Tram đem đến cơ hội
+                            nghỉ dưỡng và không gian thiên nhiên cho các gia đình có trẻ nhỏ. </p>
+                    </div>
+                    <div class="thoi_gian">
+                        <h4>
+                            Tháng 2 Năm 2021
+                        </h4>
+                    </div>
+                </li>
+                <!-- Kết thúc nội dung cho timeline thứ 1-->
+
+                <!--Nội dung cho timeline  thứ 2-->
+                <li>
+                    <div class="noi_dung">
+                        <h3>Khảo sát công trình lần 1</h3>
+                        <p>Dự án nằm ở quận 9 với 60% diện tích dành cho cây xanh và tiện ích, đang hoàn thiện mặt ngoài
+                            chuẩn bị bàn giao vào quý IV. </p>
+                    </div>
+                    <div class="thoi_gian">
+                        <h4>
+                            Tháng 5 Năm 2021
+                        </h4>
+                    </div>
+                </li>
+                <!-- Kết thúc nội dung cho timeline thứ 2-->
+            
+                <!--Nội dung cho timeline thứ 3-->
+                <li>
+                    <div class="noi_dung">
+                        <h3>Sắp xếp tài liệu đầu tư</h3>
+                        <p>Đại lý sẽ phối hợp với chủ đầu tư tổ chức lễ mở bán phân khu đẹp nhất dự án Five Star Eco City vào ngày 8/9 tới.  </p>
+                    </div>
+                    <div class="thoi_gian">
+                        <h4>
+                            Tháng 7 Năm 2021
+                        </h4>
+                    </div>
+                </li>
+                <!-- Kết thúc nội dung cho timeline thứ 3-->
+
+                <!--Nội dung cho timeline thứ 4-->
+                <li>
+                    <div class="noi_dung">
+                        <h3>Tham dự đầu tư lần 1</h3>
+                        <p>Dự án Phú Quốc Sunshine City có tổng vốn đầu tư 900 tỷ đồng dự kiến triển khai vào tháng 8 năm nay.  </p>
+                    </div>
+                    <div class="thoi_gian">
+                        <h4>
+                            Tháng 8 Năm 2021
+                        </h4>
+                    </div>
+                </li>
+                <!-- Kết thúc nội dung cho timeline thứ 4-->
+
+                <!-- Nội dung cho timeline thứ 5-->
+                <li>
+                    <div class="noi_dung">
+                        <h3>Tham dự đầu tư lần 2</h3>
+                        <p>Dự án Phú Quốc Sunshine City có tổng vốn đầu tư 900 tỷ đồng dự kiến triển khai vào tháng 8 năm nay.  </p>
+                    </div>
+                    <div class="thoi_gian">
+                        <h4>
+                            Tháng 12 Năm 2021
+                        </h4>
+                    </div>
+                </li>
+                <!-- Kết thúc nội dung cho timeline thứ 5-->
+
+                <div style="clear:both"></div>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            var pager = new Pager('myTable', 5);
+            pager.init();
+            pager.showPageNav('pager', 'pageNavPosition');
+            pager.showPage(1);
+        </script>
+    </div>
+    <footer>
+        <hr class="hr1">
+        <div class="container-fluid end">
+            <div class="row text-center">
+                <h3><center>Contract Us</center></h3>
+                <div class="col-lg-12 link">
+                    <a class="thumbnail1" href="">
+                        <img src="img/fb.png" width="50px" height="50px" />
+                    </a>
+                    <a class="thumbnail1" href="">
+                        <img src="img/insta.png" width="50px" height="50px" />
+                    </a>
+                    <a class="thumbnail1" href="">
+                        <img src="img/ig.png" width="50px" height="50px" />
+                    </a>
+                </div>
+                <div class="col-lg-12">
+                    &copy;2021 ANTi corporation. All rights reserved
+                </div>
+            </div>
+        </div>
+        
+    </footer>
+    
+    <script src="jquery.min.js"></script>
+    <script type="text/javascript">
+        
+        
+        //Thời Gian
+        function time() {
+            var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Chủ Nhật";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            nowTime = h + ":" + m + ":" + s;
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<i class="fa fa-clock-o" aria-hidden="true"></i> <span class="date">' + today + ' | ' + nowTime +
+                '</span>';
+            document.getElementById("clock").innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
+
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            }
+        }
+
+        //Thêm Bảng
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            var actions = $("table td:last-child").html();
+
+            //Add Hàng
+            $(document).on("click", ".add", function () {
+                var empty = false;
+                var input = $(this).parents("tr").find('input[type="text"]');
+                input.each(function () {
+                    if (!$(this).val()) {
+                        $(this).addClass("error");
+                        swal("Thông Báo!", "Dữ Liệu Trống Vui Lòng Kiểm Tra", "error");
+                        empty = true;
+                    } else {
+                        $(this).removeClass("error");
+                        swal("Thông Báo!", "Bạn Chưa Nhập Dữ Liệu", "error");
+                    }
+                });
+                $(this).parents("tr").find(".error").first().focus();
+                if (!empty) {
+                    input.each(function () {
+                        $(this).parent("td").html($(this).val());
+                        swal("Thành Công", "Bạn Đã Cập Nhật Thành Công", "success");
+
+                    });
+                    $(this).parents("tr").find(".add, .edit").toggle();
+                    $(".add-new").removeAttr("disabled");
+
+                }
+            });
+            // Edit Hàng
+            $(document).on("click", ".edit", function () {
+                $(this).parents("tr").find("td:not(:last-child)").each(function () {
+                    $(this).html('<input type="text" class="form-control" value="' + $(this)
+                        .text() + '">');
+                });
+                $(this).parents("tr").find(".add, .edit").toggle();
+                $(".add-new").attr("disabled", "disabled");
+            });
+            $(function () {
+                $(".add").click(function () {
+                    swal("Thành Công!", "Bạn Đã Sửa Thành Công", "success");
+
+                });
+            });
+            // Delete Hàng
+            $(document).on("click", ".delete", function () {
+                $(this).parents("tr").remove();
+                swal("Thành Công!", "Bạn Đã Xóa Thành Công", "success");
+                $(".add-new").removeAttr("disabled");
+            });
+        });
+
+     
+    </script>
+    <!--Tooltip-->
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</body>
+
+</html>
